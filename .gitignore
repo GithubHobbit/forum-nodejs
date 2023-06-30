@@ -1,0 +1,7 @@
+node_modules
+.env
+build
+bd.sqlite3
+.prettierignore
+.prettierrc
+package-lock.json
