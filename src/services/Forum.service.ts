@@ -1,16 +1,16 @@
 // import { sequelize, Forum } from "../models/index.js";
 
-// class ForumService {
-//   getDataForumsPage() {
-//      sequelize.query()
+import { AppDataSource } from '../models/index.js'
+import { User } from '../models/entity/User.js'
 
-//     Forum.findAll({
-//       attributes: {
-//         include: [
-//           sequelize.literal(``),
-//           'topic_cnt'
-//         ]
-//       }
-//     })
-//   }
-// }
+class ForumService {
+  async getData() {
+    const user = new User()
+    user.username = 'alex'
+    user.password = '123'
+
+    await AppDataSource.manager.save(User)
+  }
+}
+
+export default new ForumService()
