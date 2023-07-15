@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="static/css/forums_page.css">
+  <link rel="stylesheet" href="/static/css/forums_page.css">
   <title>Document</title>
 </head>
 <body>
   <% for(forum of forums) { %>
-  <a href="/forum/<%=forum.id%>"><%= forum.title %></a>
+  <a href="/forums/<%=forum.id%>"><%= forum.title %></a>
   <p><%= forum.description %></p>
   <p>Количество топиков: <%= forum.topic_cnt %></p>
   <hr>

@@ -1,8 +1,9 @@
 import { Request, Response } from 'express'
 import { Forum, Topic, dataSource } from '../models'
+import { ErrorController } from '.'
 
 class TopicController {
-  async createTopicView(req: Request, res: Response) {
+  async create(req: Request, res: Response) {
     if (req.method === 'GET') {
       const forums = await dataSource.manager.find(Forum)
       return res.render('create_topic_view.ejs', { forums })
@@ -29,6 +30,10 @@ class TopicController {
 
       return res.redirect('/forums')
     }
+  }
+
+  async getOne(req: Request, res: Response) {
+    res.render('topic_view.ejs')
   }
 }
 

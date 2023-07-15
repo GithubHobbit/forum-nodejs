@@ -1,7 +1,6 @@
 import { Router } from 'express'
-import topicController from '../controllers/topic.controller'
+import { TopicController } from '../controllers/index'
 
-export const topic = Router().use(
-  '/topic/create',
-  topicController.createTopicView
-)
+export const topic = Router()
+  .use('/create', TopicController.create)
+  .use('/:topicId', TopicController.getOne)

@@ -1,8 +1,7 @@
 import express, { Express, Request, Response } from 'express'
 import dotenv from 'dotenv'
-import { forum, topic } from './routes/index.js'
+import { error, forum, topic } from './routes/index.js'
 import path from 'path'
-import { fileURLToPath } from 'url'
 import { dataSource } from './models/data-source.js'
 import bodyParser from 'body-parser'
 
@@ -32,7 +31,11 @@ app
   .use('/static', express.static(__dirname + '/../src/static'))
 
 // Роуты
-app.use('/', forum).use('/', topic)
+app.use(/^[/]$/, (_, res) => {
+  // Редирект '/' на основной дефолтный адрес - '/forum'
+  res.redirect('/forums')
+})
+app.use('/forums', forum).use('/topics', topic).use('/errors', error)
 
 // Запускаем БД
 dataSource

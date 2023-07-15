@@ -1,10 +1,9 @@
 import { Request, Response } from 'express'
 import { dataSource, Forum, Topic } from '../models/index.js'
 import ForumService from '../services/Forum.service.js'
-import { forum } from '../routes/forum.js'
 
 class ForumController {
-  async createForumView(req: Request, res: Response) {
+  async create(req: Request, res: Response) {
     if (req.method == 'GET') {
       return res.render('create_forum_view.ejs')
     }
@@ -23,20 +22,7 @@ class ForumController {
     }
   }
 
-  async getTopicsView(req: Request, res: Response) {
-    const topicRepository = dataSource.getRepository(Topic)
-    const topics = await topicRepository.find({
-      where: {
-        forum: {
-          id: +req.params.forumId,
-        },
-      },
-    })
-
-    return res.render('topics_view.ejs', { topics })
-  }
-
-  async forumsView(req: Request, res: Response) {
+  async getAll(req: Request, res: Response) {
     const forumRepository = dataSource.getRepository(Forum)
     const forums = await forumRepository
       .createQueryBuilder('forum')
@@ -46,9 +32,21 @@ class ForumController {
       // .getQuery()
       .getRawMany()
 
-    // const forums: Forum[] = await forumRepository.find()
-    // console.log(forums)
     return res.render('forums_view.ejs', { forums })
+  }
+
+  async getOne(req: Request, res: Response) {
+    let forumId: number = +req.params.forumId
+    const topicRepository = dataSource.getRepository(Topic)
+    const topics = await topicRepository.find({
+      where: {
+        forum: {
+          id: forumId,
+        },
+      },
+    })
+
+    return res.render('topics_view.ejs', { topics })
   }
 }
 
