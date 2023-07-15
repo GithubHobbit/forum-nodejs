@@ -8,7 +8,12 @@
   <title>Document</title>
 </head>
 <body>
-  <%= content %>
+  <% for(forum of forums) { %>
+  <a href="/forum/<%=forum.id%>"><%= forum.title %></a>
+  <p><%= forum.description %></p>
+  <p>Количество топиков: <%= forum.topic_cnt %></p>
+  <hr>
+  <% } %>
   <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

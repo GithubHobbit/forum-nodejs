@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+    <title>Create Forum</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-4">
+          <h4>Создание топика</h4>
+          <form method="POST">
+            <div class="row g-3">
+              <div class="col-12">
+                <label for="title" class="form-label">Название топика:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="title"
+                  name="title"
+                  value="<%= typeof old_values !== 'undefined' ? old_values.title : '' %>"
+                  placeholder="Название"
+                />
+              </div>
+              <div class="col-12">
+                <label for="description" class="form-label"
+                  >Описание топика:</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="description"
+                  name="description"
+                  value="<%= typeof old_values !== 'undefined' ? old_values.description : '' %>"
+                  placeholder="Описание"
+                />
+              </div>
+              <div class="col-12">
+                <label for="description" class="form-label"
+                  >Форум топика:</label
+                >
+                <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  name="forumId"
+                  placeholder="Описание">
+                  <option selected>Выберите форум</option>
+                  <% for (let forum of forums) { %>
+                  <option value="<%= forum.id %>"><%= forum.title %></option>
+                  <% } %>
+                </select>
+              </div>
+              
+            </div>
+            <hr class="my-3" />
+            <button class="w-100 btn btn-primary">Создать</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
